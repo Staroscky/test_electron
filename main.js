@@ -18,13 +18,13 @@ function createWindow () {
 
 app.whenReady().then(createWindow)
 
-app.on ('window-all-closed', () => {
+app.on('window-all-closed', () => {
    if (process.platform !== 'darwin') {
      app. uit ()
    }
 })
 
-app.on ('activate', () => {
+app.on('activate', () => {
    if (BrowserWindow.etAllWindows().length === 0) {
      createWindow()
    }
