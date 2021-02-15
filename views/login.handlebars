@@ -1,0 +1,57 @@
+<div class="fundo-login">
+    <div class="card-login" >
+        <form action="/entrar_comprador" method="POST" id="form_login">
+            <div class="alert alert-danger fade show" role="alert" style="display: none;">
+                <strong></strong>
+                <button type="button" class="close" onclick="this.parentNode.style.display = 'none'">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <img src="../images/logo.png" class="logo-login"/>
+            {{!-- <h1 class="logo-login">EZ TRADE</h1> --}}
+            <h4 class="subtitulo-login">GERENCIAL</h4>
+            <label>Usuario</label>
+            <input type="text" class="form-control" name="descricao" onkeypress="handleEnter()"/>
+            <label>Senha</label>
+            <input type="password" class="form-control" name="senha" onkeypress="handleEnter()"/>
+            <button type="button" class="button button-success w-100 mt-4" onclick="entrar()">Entrar</button>
+        </form>
+    </div>
+    
+    
+    <img src="../images/fundo.jpeg" class="banner"/>
+    
+</div>
+<script>
+
+    async function entrar(){
+        const form = document.getElementById("form_login");
+        await fetch('/entrar', 
+            {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({
+                    "descricao" : form.querySelector("input[name='descricao']").value.trim(),
+                    "senha"     : form.querySelector("input[name='senha']").value.trim()
+                })
+            }
+        ).then((response)=>{
+            response.json().then((response)=>{
+                if(response.message == "sucesso"){
+                    window.location.href = "/"
+                }else{
+                    form.querySelector(".alert").style.display = "block";
+                    form.querySelector(".alert strong").textContent = response.message;
+                }
+            });
+        });
+    }
+
+    function handleEnter(){
+        if(event.key == "Enter"){
+            entrar();
+        }
+    }
+</script>

@@ -1,0 +1,484 @@
+  .bd-navbar {
+    background-color: var(--secundaria);
+    height: 60px;
+    margin-bottom: 15px;
+  }
+  /* .bd-navbar a:hover{
+    /* color: var(--primaria);
+  } */
+  .bd-navbar a{
+    color: white;
+    font-style: italic;
+    font-weight: bold;
+  }
+  .bd-navbar a:hover{
+    color: var(--primaria);
+    text-shadow: 0 0 4px black;
+  }
+  .bd-navbar a.active{
+    color: var(--primaria);
+    text-shadow: 0 0 4px black;
+  }
+
+
+  
+  .bd-navbar a.button{
+    color: white;
+  }
+  .bd-navbar a.button:hover{
+    color: var(--primaria);
+  }
+  
+  .bd-navbar .active a{
+    color: white;
+  }
+
+  .bd-navbar .dropdown-menu .dropdown-item{
+    color: var(--secundaria);
+  }
+
+  .bd-navbar .container-logo{
+    font-family: monospace;
+    color: #95b7ff;
+  }
+
+  .bd-navbar .nome_plataforma{
+    margin-bottom: 0;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .bd-navbar .nome_usuario{
+    color: white;
+    font-weight: bold;
+    font-size: 19px;
+    font-family: arial;
+    text-transform: uppercase;
+  }
+  /************************************************ CSS DOS CHECKBOX ********************************************************/
+  /* Customize the label (the container) */
+  .container-checkbox {
+    position: relative;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Hide the browser's default checkbox */
+  .container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    box-shadow: 0px 0px 2px #3f3f3f;
+  }
+
+  /* On mouse-over, add a grey background color */
+  .container-checkbox:hover input ~ .checkmark {
+    background-color: white; 
+  }
+
+  /* When the checkbox is checked, add a blue background */
+  .container-checkbox input:checked ~ .checkmark {
+    background-color: var(--primaria);
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the checkmark when checked */
+  .container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  /* Style the checkmark/indicator */
+  .container-checkbox .checkmark:after {
+    left: 7px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  /******************************************************* CSS DO TOGGLE ********************************************************/
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .switch input:checked + .slider {
+    background-color: #4CAF50;
+  }
+  
+  .switch input:focus + .slider {
+    box-shadow: 0 0 1px #4CAF50;
+  }
+  
+  .switch input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .switch .slider.round {
+    border-radius: 34px;
+  }
+  
+  .switch .slider.round:before {
+    border-radius: 50%;
+  }
+
+/********************************************************* PRINCIPAL **************************************************************/
+  html{
+    height: auto;
+  }
+  body{
+    background-color:#eee;
+    width: 100%;
+    height: 100vh;
+  }
+  /* .form-control{
+    text-transform: uppercase;
+  } */
+  .card{
+    float: left;
+    display: block;
+    background-color: white;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.133) 0px 3.2px 7.2px 0px, rgba(0, 0, 0, 0.11) 0px 0.6px 15.8px 10px;
+  }
+  .container{
+    max-width: 90% !important;
+  }
+
+  .titulos{
+    width: max-content;
+    position: relative;
+    text-align: center;
+    top: -40px;
+    margin: 0 auto;
+    color: white !important;
+  }
+
+  .titulo-amostra{
+    font-weight: bold;
+    text-align: center;
+    color: var(--primaria-escura);
+  } 
+
+  .form-actions{
+    width: 100%;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    display: inline-flex;
+    background-color: #b2c6d9;
+  }
+
+  .nome_usuario{
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px;
+    cursor: default;
+  }
+  /*************************************** TABS *********************************/
+  .card a.nav-link:not(.active){
+    color: white;
+  }
+  .card .nav-tabs{
+    background-color: var(--primaria-escura);
+  }
+
+  /************************************** BUTTONS ********************************/
+  .button {
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    transition-duration: 0.4s;
+    box-shadow: rgba(0, 0, 0, 0.122) 0px 3.2px 7.2px 0px, rgba(0, 0, 0, 0.09) 0px 0.6px 15.8px 10px;
+  }
+  .button-secondary{
+    background-color: #6c757d;
+  }
+  .button-secondary:hover {
+    background-color: white; 
+    color: #6c757d;
+    border: 1px solid #6c757d !important; 
+  }
+  .button-danger{
+    background-color: #f44336;
+  }
+  .button-danger:hover {
+    background-color: #771811; 
+  }
+  .button-success{
+    background-color: var(--primaria-escura);
+  }
+  .button-success:hover {
+    background-color: white; 
+    color: var(--primaria-escura);
+    border: 1px solid var(--primaria-escura);
+  }
+  .button-blue{
+    background-color: #007bffbd;
+    font-weight: bold;
+  }
+  .button-blue:hover {
+    background-color: white; 
+    color: #007bffbd;
+    border: 1px solid #007bffbd;
+  }
+
+  .button-ven-com{
+    background-color: var(--primaria-escura);
+    font-weight: 700;
+    cursor: default;
+  }
+
+  /************ login *************/
+  .fundo-login{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+  }
+  .card-login{
+    width: 450px;
+    min-height: 455px;
+    margin-top: -40px;
+    padding: 10px 40px 40px 40px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.133) 2px 1px 7.2px 0px, rgba(0, 0, 0, 0.11) 0px 0.6px 19px 6px;
+    position: relative;
+    z-index: 2;
+  }
+  .ven_comp{
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: -20px;
+  }
+  .icon-voltar-login{
+    width: 20px;
+    position: absolute;
+    left: 13px;
+    cursor: pointer;
+  }
+  .logo-login{
+    height: 250px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-family: inherit;
+    font-size: 55px;
+  }
+  .card-banner {
+    width: 450px;
+    min-height: 455px;
+    margin-top: -40px;
+    padding: 10px 40px 40px 40px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.133) 16px 0px 7.2px 0px, rgba(0, 0, 0, 0.11) 20px 0px 15.8px 10px;
+    padding: 0;
+    width: max-content;
+    height: 99px;
+  }
+  .banner{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    opacity: 0.5;
+  }
+  .subtitulo-login{
+    text-align: center !important;
+    color: var(--primaria-escura);
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  .card-cadastro{
+    width: 400px;
+    height: 400px;
+    margin-top: -40px;
+    padding: 10px 40px 40px 40px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.133) 7px 1px 7.2px 0px, rgba(0, 0, 0, 0.11) 20px 1px 15.8px 10px;
+  }
+
+  .container-busca{
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 300px;
+    padding: 20px 0 0 20px;
+  }
+  .container-busca input{
+    width: 70% !important;
+  }
+
+  .dropdown-usuario .dropdown-menu{
+    right: 0 !important;
+    left: auto !important;
+  }
+  .dropdown-usuario{
+    position: relative;
+  }
+
+  .modal-aviso{
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    top: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:  rgba(87, 86, 86, 0.38);
+    position: fixed;
+  }
+  .modal-content-aviso{
+    width: 500px;
+    margin-top: -90px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.133) 2px 1px 7.2px 0px, rgba(0, 0, 0, 0.11) 0px 0.6px 19px 6px;
+  }
+  .modal-aviso h3{
+    text-align: center;
+    font-weight: bold;
+    color: #6e9bed;
+  }
+  .img-aviso{
+    width: 200px;
+    height: 150px;
+    max-height: 150px !important;
+    min-height: auto !important;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  #ref_desc_detalhe{
+    font-weight: bold;
+    color: var(--primaria-escura);
+    font-size: 25px;
+  }
+
+  .filtros{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .filtros div{
+    max-width: 200px;
+    margin-left: 5px;
+  }
+
+  .filtros-action{
+    margin-left: 20px !important;
+    align-self: center;
+  }
+
+  .result{
+    padding: 50px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    font-size: 21px;
+  }
+  .result div{
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+  }
+
+  .result #debito_r{
+    color: red;
+    font-weight: bold;
+  }
+  .result #credito_r{
+    color: green;
+    font-weight: bold;
+  }
+  

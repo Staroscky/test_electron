@@ -1,0 +1,53 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100% - 85px);
+    justify-content: center;
+}
+
+.titulo-amostra{
+    position: absolute;
+    top: 70px;
+}
+.card-buttons{
+    display: block;
+    float: left;
+    max-width: 90%;
+}
+
+.button-inicial{
+    display: flex;
+    float: left;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, var(--primaria) 10%, var(--primaria-escura) 100%);
+    min-width: 260px;
+    min-height: 130px;
+    padding: 40px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.133) 0px 3.2px 7.2px 0px, rgba(0, 0, 0, 0.11) 0px 0.6px 15.8px 10px;
+}
+.button-inicial:active {
+    transform: translate(0px, 5px);
+    -webkit-transform: translate(0px, 5px);
+    box-shadow: 0px 1px 0px 0px;
+}
+.text-button-inicial{
+    color: white;
+    font-size: 22px;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 1400px){ 
+    .card-buttons{
+        display: block;
+        float: left;
+        max-width: 100%;
+    }
+}

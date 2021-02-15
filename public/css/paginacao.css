@@ -1,0 +1,104 @@
+#table{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+/* #table tbody tr{
+    width: 100%;
+    background: var(--primaria-fundo);
+    color: black;
+}
+#table tbody tr:nth-child(2n){
+    background: none;
+    color: black;
+    background-color: #eee;
+} */
+#table tbody tr td{
+    padding: 5px;
+    vertical-align: middle !important;
+    font-weight: 500;
+}
+.container-busca{
+    display: inline-flex;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    align-items: baseline;
+}
+.subtitulo{
+    margin: 0 auto;
+    font-weight: 500;
+    color: var(--primaria);
+}
+
+#dataTables {
+    font: 400 12px 'Open Sans',HelveticaNeue,Helvetica,Arial
+}
+#dataTables .controls {
+    height: 22px;
+    line-height: 22px;
+    float: inline-end;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#dataTables .controls div {
+    display: flex;
+    align-items: center;
+    height: auto;
+}
+
+#dataTables .controls div:not(.numbers),
+#dataTables .controls div.numbers div{
+    border-top: 1px solid #EAEDF1;
+    border-left: 1px solid #EAEDF1;
+    border-right: 1px solid #EAEDF1;
+    border-bottom: 1px solid #EAEDF1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    border-radius: 3px;
+    padding: 4px 7px;
+    margin: 0 3px;
+    cursor: pointer;
+    color: #686868;
+    font-weight: 100;
+    font-size: 16px;
+    background: #EAEDF1;
+    height: -webkit-fill-available;
+}
+
+#dataTables .controls div.numbers div:hover,
+#dataTables .controls div.numbers div.active {
+    color: white;
+    background: var(--primaria);
+}
+
+#dataTables .btn-selecionar{
+    border: 1px solid #EAEDF1;
+    border-radius: 3px;
+    padding: 4px 7px;
+    margin: 0 3px;
+    cursor: pointer;
+    color: white;
+    font-weight: 200;
+    font-size: 16px;
+    background: #14766e;
+    height: 31px;
+}
+#dataTables table thead th{
+    text-align: center;
+}
+#dataTables table thead input{
+    width: 100%;
+    border: 1px solid #a4a4a4;
+    border-radius: 4px;
+    outline: none;
+    padding: 3px;
+}
+#dataTables .qtdTotal{
+    margin-right: auto;
+    font: 400 12px 'Open Sans',HelveticaNeue,Helvetica,Arial
+}

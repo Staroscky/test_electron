@@ -1,0 +1,553 @@
+
+
+<div class="container-fluid">
+    <div class="filtros">
+        <div>
+            <label for="recebimento_data_ini">Recebimento De</label> 
+            <input type="date" class="form-control" name="recebimento_data_ini" id="recebimento_data_ini" />
+        </div>
+        <div>
+            <label for="recebimento_data_fin">Até</label>
+            <input type="date" class="form-control" name="recebimento_data_fin" id="recebimento_data_fin" />
+        </div>
+        <div>
+            <label for="vencimento_data_ini">Vencimento De</label> 
+            <input type="date" class="form-control" name="vencimento_data_ini" id="vencimento_data_ini" />
+        </div>
+        <div>
+            <label for="vencimento_data_fin">Até</label>
+            <input type="date" class="form-control" name="vencimento_data_fin" id="vencimento_data_fin" />
+        </div>
+        <div>
+            <label for="numero">Número Cheque</label>
+            <input type="text" class="form-control" name="numero" id="numero" />
+        </div>
+        <div>
+            <label for="tipo">Tipo</label>
+            <select class="form-control" name="tipo" id="tipo">
+                <option value=""></option>
+                <option value="1">Crédito</option>
+                <option value="2">Débito</option>
+            </select>
+        </div>
+        <div>
+            <label for="compensado">Compensado</label>
+            <select class="form-control" name="compensado" id="compensado">
+                <option value=""></option>
+                <option value="true">Sim</option>
+                <option value="false">Nao</option>
+            </select>
+        </div>
+        <div class="filtros-action">
+            <button type="button" class="button button-success" onclick="busca()">BUSCAR</button>
+        </div>
+    </div>
+    <div id="dataTables" style="margin-top: 20px;">
+        <table cellpadding="0" cellspacing="0" border="0" id="table" class="dataTable table-sm table-striped w-100">
+            <thead>
+                <tr>
+                    <th class="sorting"><div onclick="data_filter('data_recebimento', this)">Data Recebimento</div></th>
+                    <th class="sorting"><div onclick="data_filter('data_vencimento', this)">Data Vencimento</div></th>
+                    <th class="sorting"><div onclick="data_filter('tipo', this)">Tipo</div></th>
+                    <th class="sorting"><div onclick="data_filter('numero', this)">Número</div></th>
+                    <th class="sorting"><div onclick="data_filter('valor', this)">Valor</div></th>
+                    <th class="sorting"><div onclick="data_filter('titular', this)">Titular</div></th>
+                    <th class="sorting"><div onclick="data_filter('compensado', this)">Compensado</div></th>
+                    <th><div>Ação</div></th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                
+                
+            </tbody>
+        </table>
+        <div class="table-footer">
+            
+            <div class="controls">
+                <span class="qtdTotal"></span>
+                <div class="first">Primeiro</div>
+                <div class="prev">Anterior</div>
+                <div class="numbers">
+                    <div>1</div>
+                </div>
+                <div class="next">Proximo</div>
+                <div class="last">Ultimo</div>
+            </div>
+            
+        </div>
+        <div class="result">
+            <div>
+                <span>Débito:</span> <span id="debito_r"></span>
+            </div>
+            <div>
+                <span>Crédito:</span> <span id="credito_r"></span>
+            </div>
+            <div>
+                <span>Saldo:</span> <span id="saldo_r"></span>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" id="modal_cheque" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cheque</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="_id" />
+                <div class="row" >
+                    <div class="form-group col-6" >
+                        <label>Data Recebimento</label>
+                        <input type="date" class="form-control" name="m_data_recebimento" id="m_data_recebimento" autocomplete="off"/>
+                    </div>
+                    <div class="form-group col-6" >
+                        <label>Data Vencimento</label>
+                        <input type="date" class="form-control" name="m_data_vencimento" id="m_data_vencimento" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="form-group col-6" >
+                        <label>Tipo</label>
+                        <select class="form-control" name="m_tipo" id="m_tipo">
+                            <option value="1">Crédito</option>
+                            <option value="2">Débito</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6" >
+                        <label>Titular</label>
+                        <input type="text" class="form-control" name="m_titular" id="m_titular" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="form-group col-6" >
+                        <label>Número</label>
+                        <input type="text" class="form-control" name="m_numero" id="m_numero" autocomplete="off"/>
+                    </div>
+                    <div class="form-group col-6" >
+                        <label>Valor</label>
+                        <input type="text" class="form-control" name="m_valor" id="m_valor" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="form-group col-6" >
+                        <label>Contato</label>
+                        <input type="text" placeholder="(DDD) 99999-9999" class="form-control" name="m_contato" id="m_contato" autocomplete="off"/>
+                    </div>
+                    <div class="form-group col-6">
+                        <label>Compensado</label>
+                        <input type="checkbox" class="form-control" name="m_compensado" id="m_compensado" autocomplete="off"/>
+                    </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="justify-content: center;">
+                    <button type="button" class="button button-danger ml-auto" data-dismiss="modal">CANCELAR</button>
+                    <button type="button" class="button button-success ml-2" onclick="altera_cheque()">SALVAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cheque</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Você tem certeza que deseja excluir?</h5>
+                <hr />
+                <div class="d-flex" style="justify-content: center;">
+                    <button type="button" class="button button-success ml-auto" data-dismiss="modal">CANCELAR</button>
+                    <button type="button" class="button button-danger ml-2" data-_id="" id="delete_cheque_id" onclick="delete_cheque()">EXCLUIR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    async function busca(){
+
+        data = {
+            recebimento_data_ini    : document.getElementById("recebimento_data_ini").value, 
+            recebimento_data_fin    : document.getElementById("recebimento_data_fin").value, 
+            vencimento_data_ini     : document.getElementById("vencimento_data_ini").value, 
+            vencimento_data_fin     : document.getElementById("vencimento_data_fin").value, 
+            numero                  : document.getElementById("numero").value, 
+            tipo                    : document.getElementById("tipo").value, 
+            compensado              : document.getElementById("compensado").value
+        }
+
+        await fetch('/api/busca_cheques', 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(data)
+            }
+        ).then((response)=>{
+            response.json().then(response =>{
+                console.log(response)
+                data_original   = response;
+                data            = response;
+
+                document.querySelector(".table-footer span").innerText = `Encontrado ${data.length} itens`;
+
+                init();
+                update();
+
+                controls.createListenners();
+
+                state.totalDebito = 0;
+                state.totalCredito = 0;
+
+                response.forEach(item => {
+                    if(item.tipo == 1){
+                        state.totalCredito += item.valor;
+                    }else{
+                        state.totalDebito += item.valor;
+                    }
+                })
+
+                html.get(".result").style.display = "flex";
+                html.get(".result #debito_r").textContent = state.totalDebito.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+                html.get(".result #credito_r").textContent = state.totalCredito.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+                html.get(".result #saldo_r").textContent = (state.totalCredito - state.totalDebito).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+                html.get(".result #saldo_r").style.color = ((state.totalCredito - state.totalDebito) > 0 ? "green" : "red")
+            })
+            
+        }).catch((err)=>{
+            alert("Erro ao buscar!")
+        }); 
+        
+		
+       
+	}
+
+    function modal_delete(item){
+        const cheque = JSON.parse(item);
+       
+        html.get("#delete_cheque_id").dataset._id = cheque._id;
+        $('#modal_delete').modal('show');
+    }
+
+    function modal_cheque(item){
+        const cheque = JSON.parse(item);
+        document.getElementById("_id").value = cheque._id;
+        document.getElementById("m_numero").value = (cheque.numero ? cheque.numero : "" );
+        document.getElementById("m_data_recebimento").value = (cheque.data_recebimento ? cheque.data_recebimento.split("T")[0] : "");
+        document.getElementById("m_data_vencimento").value = (cheque.data_vencimento ? cheque.data_vencimento.split("T")[0] : "");
+        document.getElementById("m_valor").value = (cheque.valor ? cheque.valor : "");
+        document.getElementById("m_tipo").value = (cheque.tipo ? cheque.tipo : "");
+        document.getElementById("m_titular").value = (cheque.titular ? cheque.titular : "");
+        document.getElementById("m_compensado").checked = (cheque.compensado ? true : false);
+        document.getElementById("m_contato").value = (cheque.contato ? cheque.contato : "");
+
+        $('#modal_cheque').modal('show');
+    }
+	
+    async function altera_cheque(){
+        let data = {
+            _id                 : document.getElementById("_id").value,
+            numero              : document.getElementById("m_numero").value,
+            data_recebimento    : document.getElementById("m_data_recebimento").value,
+            data_vencimento     : document.getElementById("m_data_vencimento").value,
+            valor               : document.getElementById("m_valor").value,
+            tipo                : document.getElementById("m_tipo").value,
+            titular             : document.getElementById("m_titular").value,
+            compensado          : document.getElementById("m_compensado").checked,
+            contato             : document.getElementById("m_contato").value
+        }
+
+        await fetch('/api/cheques', 
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(data)
+            }
+        ).then((response)=>{
+            response.json().then((retorno)=>{
+                console.log(retorno)
+                if(retorno && retorno.message == "error"){
+                    alert("Erro ao alterar!")
+                }else{
+                    busca();
+                    $('#modal_cheque').modal('hide');
+                }
+            }).catch((err)=>{
+                alert("Erro ao alterar!")
+            })
+            
+        }).catch((err)=>{
+            alert("Erro ao alterar!")
+        }); 
+    }
+    
+    async function delete_cheque(){
+        let _id = html.get("#delete_cheque_id").dataset._id;
+
+        await fetch('/api/cheques/'+_id, 
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            }
+        ).then((response)=>{
+            busca();
+            $('#modal_delete').modal('hide');
+        }).catch((err)=>{
+            alert("Erro ao excluir!")
+        }); 
+    }
+    // paginacao
+
+	let perPage = 20;
+    let data_original;
+    let data;
+    
+    const state = {
+        page: 1,
+        perPage: perPage,
+        totalPage: 0,
+        maxVisibleButtons: 5,
+		id_produtos_layout: 0,
+		id_classe: null,
+        edit: false,
+        totalDebito: 0,
+        totalCredito: 0
+    }
+
+    const order_by = {
+        field: '',
+        order: ''
+    }
+
+    const html = {
+        get(element){
+            return document.querySelector(element)
+        }
+    }
+
+    const controls = {
+        next(){
+            state.page++;
+
+            if(state.page > state.totalPage){
+                state.page = state.totalPage;
+            }
+        },
+        prev(){
+            state.page--;
+
+            if(state.page < 1){
+                state.page = 1;
+            }
+        }, 
+        goTo(page){
+            if(page < 1){
+                state.page = 1
+            }
+
+            state.page = +page;
+
+            if(page > state.totalPage){
+                state.page = state.totalPage
+            }
+            
+        },
+        createListenners(){
+            html.get(".first").addEventListener("click", () => {
+                controls.goTo(1);
+                update()
+            })
+
+            html.get(".last").addEventListener("click", () => {
+                controls.goTo(state.totalPage);
+                update()
+            })
+
+            html.get(".next").addEventListener("click", () => {
+                controls.next();
+                update()
+            })
+
+            html.get(".prev").addEventListener("click", () => {
+                controls.prev();
+                update()
+            })
+        }
+    }
+
+    const list = {
+        create(item){
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+				<td>${item.data_recebimento ? item.data_recebimento.split("T")[0].split("-").reverse().join("/") : ``}</td>
+				<td>${item.data_vencimento ? item.data_vencimento.split("T")[0].split("-").reverse().join("/") : ``}</td>
+				<td>${item.tipo == 1 ? `Crédito` : `Débito`}</td>
+				<td>${item.numero}</td>
+				<td>${item.valor ? item.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) : ``}</td>
+				<td>${item.titular}</td>
+				<td>${(item.compensado ? `X` : '' )}</td>
+				<td>
+					<button type="button" class="button button-success" data-item='${JSON.stringify(item)}' onclick="modal_cheque(this.dataset.item)">ALTERAR</button>		
+					<button type="button" class="button button-danger" data-item='${JSON.stringify(item)}' onclick="modal_delete(this.dataset.item)">
+                        <img src="/images/icons/excluir.svg" height="20px" width="20px"/>
+                    </button>		
+				</td>
+            `
+
+            html.get("table .list").appendChild(tr);
+        },
+        update(){
+            html.get('table .list').innerHTML = "";
+
+            let page = state.page - 1;
+            let start = page * state.perPage;
+            let end = start + state.perPage;
+
+            const paginatedItems = data.slice(start, end);
+            
+            paginatedItems.forEach(list.create)
+        }
+    }
+
+    const buttons = {
+        create(number){
+            const button = document.createElement('div');
+            button.innerHTML = number;
+
+            if(state.page == number){
+                button.classList.add('active');
+            }
+
+            button.addEventListener('click', (event)=>{
+                const page = event.target.innerText;
+
+                controls.goTo(page);
+                update();
+            })
+
+            html.get('.controls .numbers').appendChild(button);
+        },
+        update(){
+            html.get(".controls .numbers").innerHTML = "";
+            const {maxLeft, maxRight} = buttons.calculateMaxVisible();
+            for(let page = maxLeft; page <= maxRight; page++){
+                buttons.create(page)
+            }
+        },
+        
+        calculateMaxVisible(){
+            let maxLeft = (state.page - Math.floor( state.maxVisibleButtons / 2 ) );
+            let maxRight = (state.page + Math.floor( state.maxVisibleButtons / 2 ) );
+            if(maxLeft < 1){
+                maxLeft = 1;
+                maxRight = state.maxVisibleButtons;
+            }
+            if(maxRight > state.totalPage){
+                maxLeft = state.totalPage - (state.maxVisibleButtons - 1 );
+                maxRight = state.totalPage;
+
+                if(maxLeft < 1){
+                    maxLeft = 1;
+                }
+            }
+            
+            return {maxLeft, maxRight}
+        }
+    }
+
+    function data_filter(p_field, div){
+        let {field, order} = order_by;
+
+        if(field == '' || field != p_field){
+            order_by.field = p_field;
+            order_by.order = 'ASC';
+
+        }else if(field == p_field){
+
+            if(order == 'ASC'){
+                order_by.order = 'DESC'
+            }else{
+                order_by.order = 'ASC'
+            }
+
+        }
+        document.querySelectorAll(".sorting_desc, .sorting_asc").forEach((th)=>{
+            th.classList.remove("sorting_desc");
+            th.classList.remove("sorting_asc");
+        })
+        if(order == 'DESC'){
+            div.parentNode.classList.add("sorting_desc");
+        }else{
+            div.parentNode.classList.add("sorting_asc");
+        }
+
+        ordenar();
+    }
+
+    function ordenar(){
+        let {field, order} = order_by;
+
+        if(order == 'ASC'){
+            data.sort(function (a, b) {
+                if (a[field] > b[field]) {
+                    return 1;
+                }
+                if (a[field] < b[field]) {
+                    return -1;
+                }
+                
+                return 0;
+            });
+        }else{
+            data.sort(function (a, b) {
+                if (a[field] > b[field]) {
+                    return -1;
+                }
+                if (a[field] < b[field]) {
+                    return 1;
+                }
+
+                return 0;
+            });
+        }
+        
+        init()
+        update();
+    }
+
+    function update(){
+        list.update();
+        buttons.update();
+    }
+    
+    function init(){
+        state.page = 1;
+        state.totalPage = Math.ceil(data.length / state.perPage);
+    }
+
+    function attPerPage(qtdPage){
+        state.perPage = +qtdPage;
+        init();
+        update();
+    }
+
+</script>
