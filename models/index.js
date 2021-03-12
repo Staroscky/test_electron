@@ -1,3 +1,4 @@
 const Cheques = require("./Cheques");
+const Usuarios = require("./Usuarios");
 
-module.exports = { Cheques };
+module.exports = { Cheques, Usuarios };

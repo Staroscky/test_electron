@@ -28,4 +28,4 @@ app.use(routes)
 
 //Porta
 const PORT = 3000;
-http.listen(PORT);
+http.listen(PORT, ()=> console.log(`Rodando na porta ${PORT}`));
