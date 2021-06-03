@@ -1,6 +1,7 @@
 
 
 const Cheques = require('../models/Cheques')
+const asyncForEach = require('async-await-foreach') 
 const moment = require('moment');
 
 module.exports = {
@@ -33,10 +34,16 @@ module.exports = {
             where.compensado = compensado
         }
 
-        console.log(where)
-
         try {
-            res.json(await Cheques.find(where));
+            const cheques = await Cheques.find(where).sort('data_vencimento');
+            let saldoTotal = 0;
+            await asyncForEach(cheques, (item)=>{
+                saldoTotal = (item.tipo == 1 ? saldoTotal + item.valor : saldoTotal - item.valor)
+            })
+            res.json({
+                saldoTotal,
+                contas: cheques
+            });
         } catch (error) {
             console.log(error.message);
             res.json();
@@ -47,7 +54,7 @@ module.exports = {
         
         await Cheques.create({
             numero,
-            data_recebimento: data_recebimento ? moment(data_recebimento) : null,
+            data_recebimento: moment(data_recebimento),
             data_vencimento: moment(data_vencimento),
             valor,
             tipo,
@@ -76,7 +83,7 @@ module.exports = {
         await Cheques.findOne({ _id: _id }).then((cheque)=>{
             
             cheque.numero = numero;
-            cheque.data_recebimento = data_recebimento ? moment(data_recebimento) : null;
+            cheque.data_recebimento = moment(data_recebimento);
             cheque.data_vencimento = moment(data_vencimento);
             cheque.valor = valor;
             cheque.tipo = tipo;

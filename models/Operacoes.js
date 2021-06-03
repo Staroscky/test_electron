@@ -1,16 +1,8 @@
 const mongoose = require("mongoose");
 
-const Cheques = new mongoose.Schema(
+const Operacoes = new mongoose.Schema(
     {
-        numero: {
-            required: true,
-            type: String,
-            unique: true
-        },
-        data_recebimento: {
-            type: Date
-        },
-        data_vencimento: {
+        data: {
             required: true,
             type: Date
         },
@@ -22,12 +14,16 @@ const Cheques = new mongoose.Schema(
             required: true,
             type: Number
         },
-        titular:{
-            type: mongoose.Schema.Types.ObjectId
+        tipo_operacao: {
+            required: true,
+            type: Number
         },
         compensado: {
             type: Boolean,
             default: false,
+        },
+        id_cliente: {
+            type: mongoose.Schema.Types.ObjectId
         },
         contato:{
             type: String,
@@ -42,13 +38,13 @@ const Cheques = new mongoose.Schema(
     }
 );
 
-Cheques.set("toObject", { virtuals: true });
-Cheques.set("toJSON", { virtuals: true });
+Operacoes.set("toObject", { virtuals: true });
+Operacoes.set("toJSON", { virtuals: true });
 
-Cheques.virtual("clientes", {
+Operacoes.virtual("clientes", {
     ref: "Clientes",
-    localField: "titular",
+    localField: "id_cliente",
     foreignField: "_id"
 });
 
-module.exports = mongoose.model("Cheques", Cheques);
+module.exports = mongoose.model("Operacoes", Operacoes);

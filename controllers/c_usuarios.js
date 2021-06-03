@@ -10,11 +10,18 @@ function generateToken(params = {}){ //no parms vai ter o id do user para gerar 
         //expiresIn: EXPIRA_EM_SEGUNDOS
     })
 }
+Usuarios.find().then((dados)=>{
+    if(!dados[0]){
+        Usuarios.create({descricao: "admin", senha: "admin"})
+    }
+})
 
 module.exports = {
     async login (req, res){
         const {descricao, senha} = req.body;
-    
+        
+        
+
         const user = await Usuarios.findOne({"descricao": descricao, "senha": senha}).catch((err)=>{
             console.log(err)
         })

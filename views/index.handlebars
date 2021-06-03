@@ -201,8 +201,8 @@
         ).then((response)=>{
             response.json().then(response =>{
                 console.log(response)
-                data_original   = response;
-                data            = response;
+                data_original   = response.contas;
+                data            = response.contas;
 
                 document.querySelector(".table-footer span").innerText = `Encontrado ${data.length} itens`;
 
@@ -214,7 +214,7 @@
                 state.totalDebito = 0;
                 state.totalCredito = 0;
 
-                response.forEach(item => {
+                response.contas.forEach(item => {
                     if(item.tipo == 1){
                         state.totalCredito += item.valor;
                     }else{
